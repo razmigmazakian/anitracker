@@ -18,7 +18,7 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 | My Lists screen | In progress |
 | Discover search and filters | Not started |
 | Home dashboard | Not started |
-| AsyncStorage persistence | Not started |
+| AsyncStorage persistence | Done |
 | Profile settings and logout | Not started |
 
 ## Features
@@ -35,11 +35,11 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 - From Anime details, the user can add the title to their list or edit their entry (status, episodes watched, optional score and notes) with the entry form, which is validated with Zod. Episodes cannot exceed the title's total. Saving shows a confirmation and returns to details.
 - Remove from List asks for confirmation (Cancel / Remove) before deleting the entry.
 - Reusable `StatusChip` and `EntryList` components.
+- List entries are saved with AsyncStorage (key `anitracker:entries`) and restored when the app starts. On the very first launch the 4 mock entries are used. After that the saved list is always used, including when it is empty. A loading indicator shows while entries load, and an error message shows if loading or saving fails. If loading fails, the app does not save, so stored data is never overwritten.
 
 ### Partially implemented
 - The catalogue has 10 titles (5 series, 5 movies), some marked as trending or popular. Covers are placeholders, not images.
 - Home shows only a Continue Watching list. My Lists shows all entries in one list, without grouping, counts or filters. Profile is a placeholder.
-- Entries are not saved yet, so changes are lost when the app restarts.
 
 ### Planned
 - Home dashboard: greeting, statistics, watchlist preview.

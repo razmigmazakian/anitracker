@@ -1,8 +1,9 @@
 import { router } from "expo-router";
-import { Pressable, ScrollView, StyleSheet, Text } from "react-native";
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text } from "react-native";
 
 import { listStatusLabels } from "@/constants/listStatus";
 import { colors, fontSize, spacing } from "@/constants/theme";
+import { useEntries } from "@/context/EntriesContext";
 import { catalogue } from "@/data/catalogue";
 import type { ListEntry } from "@/types/anime";
 
@@ -13,10 +14,16 @@ type Props = {
 };
 
 export default function EntryList({ entries, emptyMessage, heading }: Props) {
+  const { isLoading, error } = useEntries();
+
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
       {heading ? <Text style={styles.heading}>{heading}</Text> : null}
-      {entries.length === 0 ? <Text style={styles.progress}>{emptyMessage}</Text> : null}
+      {isLoading ? <ActivityIndicator color={colors.primary} accessibilityLabel="Loading list" /> : null}
+      {error ? <Text style={styles.error}>{error}</Text> : null}
+      {!isLoading && !error && entries.length === 0 ? (
+        <Text style={styles.progress}>{emptyMessage}</Text>
+      ) : null}
       {entries.map((entry) => {
         const anime = catalogue.find((item) => item.id === entry.animeId);
         if (!anime) return null;
@@ -66,6 +73,10 @@ const styles = StyleSheet.create({
   },
   progress: {
     color: colors.textMuted,
+    fontSize: fontSize.medium,
+  },
+  error: {
+    color: colors.danger,
     fontSize: fontSize.medium,
   },
 });
