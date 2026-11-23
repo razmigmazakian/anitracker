@@ -12,6 +12,7 @@ export const catalogue: Anime[] = [
     synopsis:
       "After outliving her adventuring companions, an elf mage sets out to understand the people she once took for granted.",
     coverUrl: "",
+    trending: true,
   },
   {
     id: "2",
@@ -24,6 +25,7 @@ export const catalogue: Anime[] = [
     synopsis:
       "Two brothers search for the Philosopher's Stone to restore what they lost in a failed alchemy experiment.",
     coverUrl: "",
+    popular: true,
   },
   {
     id: "3",
@@ -36,6 +38,7 @@ export const catalogue: Anime[] = [
     synopsis:
       "A teenager in rural Japan and a student in Tokyo begin swapping bodies and try to find each other.",
     coverUrl: "",
+    popular: true,
   },
   {
     id: "4",
@@ -48,5 +51,84 @@ export const catalogue: Anime[] = [
     synopsis:
       "After her parents are transformed, Chihiro works in a bathhouse for spirits while looking for a way to bring them home.",
     coverUrl: "",
+    popular: true,
+  },
+  {
+    id: "5",
+    title: "Steins;Gate",
+    type: "series",
+    genres: ["Drama"],
+    episodes: 24,
+    year: 2011,
+    rating: 9.07,
+    synopsis:
+      "A group of friends discovers how to send messages into the past and learns how much a single change can cost.",
+    coverUrl: "https://api-cdn.myanimelist.net/images/anime/5/73199.jpg",
+    popular: true,
+  },
+  {
+    id: "6",
+    title: "Hunter x Hunter (2011)",
+    type: "series",
+    genres: ["Adventure", "Fantasy"],
+    episodes: 148,
+    year: 2011,
+    rating: 9.03,
+    synopsis:
+      "Gon takes the Hunter Exam and makes new friends as he searches for his missing father.",
+    coverUrl: "",
+    popular: true,
+  },
+  {
+    id: "7",
+    title: "Attack on Titan Season 3 Part 2",
+    type: "series",
+    genres: ["Drama", "Fantasy"],
+    episodes: 10,
+    year: 2019,
+    rating: 9.06,
+    synopsis:
+      "The Scouts return to Shiganshina to reclaim the district and uncover what lies beneath Eren's childhood home.",
+    coverUrl: "https://api-cdn.myanimelist.net/images/anime/1517/100633.jpg",
+    trending: true,
+  },
+  {
+    id: "8",
+    title: "Chainsaw Man – The Movie: Reze Arc",
+    type: "movie",
+    genres: ["Fantasy", "Romance"],
+    episodes: 1,
+    year: 2025,
+    rating: 9.05,
+    synopsis:
+      "Denji meets a café worker named Reze and starts to imagine a life beyond hunting devils.",
+    coverUrl: "",
+    trending: true,
+  },
+  {
+    id: "9",
+    title: "A Silent Voice",
+    type: "movie",
+    genres: ["Drama"],
+    episodes: 1,
+    year: 2016,
+    rating: 8.93,
+    synopsis:
+      "Years after bullying a deaf classmate, a teenager seeks her out to apologize and make amends.",
+    coverUrl: "",
+    trending: true,
+  },
+  {
+    id: "10",
+    title: "Violet Evergarden: The Movie",
+    type: "movie",
+    genres: ["Drama", "Romance"],
+    episodes: 1,
+    year: 2020,
+    rating: 8.83,
+    synopsis:
+      "A letter writer takes on a young boy's request while holding on to hope that someone she lost is still alive.",
+    coverUrl: "",
+    trending: true,
   },
 ];

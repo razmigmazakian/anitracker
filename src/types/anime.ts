@@ -8,6 +8,8 @@ export type Anime = {
   rating: number;
   synopsis: string;
   coverUrl: string;
+  trending?: boolean;
+  popular?: boolean;
 };
 
 export type ListStatus =
