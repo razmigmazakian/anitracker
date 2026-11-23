@@ -12,9 +12,9 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 |---|---|
 | Project setup, template removed, Zod and AsyncStorage installed | Done |
 | Navigation skeleton (welcome, login, 4 tabs, details, entry form) | Done |
-| Catalogue mock data and reusable components | In progress |
-| Mock login with Zod validation | Not started |
-| Add / edit / remove list entries | Not started |
+| Catalogue mock data and reusable components | Done |
+| Mock login with Zod validation | Done |
+| Add / edit / remove list entries | In progress |
 | My Lists screen | Not started |
 | Discover search and filters | Not started |
 | Home dashboard | Not started |
@@ -29,13 +29,14 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 - Dark theme constants (colors, spacing, font sizes) used across screens.
 - Reusable `AnimeCard` component that receives an anime and an `onPress` callback through props.
 - Discover lists the catalogue with `AnimeCard`; tapping a card opens the Anime details screen, which shows the title's cover, type, genres, episodes, year, rating and synopsis, or "Anime not found" for an unknown id.
+- Welcome screen and mock login. A Zod schema checks the email format and a password of at least 6 characters. Errors appear under each field, and wrong credentials show "Incorrect email or password". A successful login replaces the login screen with the tabs.
+- Reusable `TextField` and `PrimaryButton` components.
 
 ### Partially implemented
-- The catalogue has 4 titles (2 series, 2 movies) with placeholder covers instead of images.
-- Home, My Lists and Profile show placeholder content. Login has no validation yet. The entry form screen is a placeholder.
+- The catalogue has 10 titles (5 series, 5 movies), some marked as trending or popular. Covers are placeholders, not images.
+- Home, My Lists and Profile show placeholder content. The entry form screen is a placeholder.
 
 ### Planned
-- Welcome screen and mock login with Zod validation.
 - Bottom tab navigation: Home, Discover, My Lists, Profile.
 - Home dashboard: greeting, Continue Watching, statistics, watchlist preview.
 - Discover: search bar, filters (genre, series, movies), Trending and Popular rows.

@@ -1,19 +1,32 @@
 import { router } from "expo-router";
-import { Button, Text, View, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-export default function Index() {
+import PrimaryButton from "@/components/PrimaryButton";
+import { colors, fontSize, spacing } from "@/constants/theme";
+
+export default function WelcomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Welcome</Text>
-      <Button title="Get Started" onPress={() => router.push("/login")} />
+    <View style={styles.screen}>
+      <Text accessibilityRole="header" style={styles.heading}>
+        Welcome to AniTracker
+      </Text>
+      <PrimaryButton title="Get Started" onPress={() => router.push("/login")} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    alignItems: "center",
     justifyContent: "center",
+    backgroundColor: colors.background,
+    padding: spacing.large,
+    gap: spacing.medium,
+  },
+  heading: {
+    color: colors.text,
+    fontSize: fontSize.large,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
