@@ -18,3 +18,11 @@ export type ListStatus =
   | "completed"
   | "onHold"
   | "dropped";
+
+export type ListEntry = {
+  animeId: string;
+  status: ListStatus;
+  episodesWatched: number;
+  score?: number;
+  notes?: string;
+};

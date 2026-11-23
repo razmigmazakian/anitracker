@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View, type TextInputProps } from "react-native";
 
 import { colors, fontSize, spacing } from "@/constants/theme";
 
@@ -7,6 +7,8 @@ type Props = {
   value: string;
   onChangeText: (value: string) => void;
   error?: string;
+  keyboardType?: TextInputProps["keyboardType"];
+  multiline?: boolean;
   secureTextEntry?: boolean;
 };
 
@@ -15,6 +17,8 @@ export default function TextField({
   value,
   onChangeText,
   error,
+  keyboardType,
+  multiline,
   secureTextEntry = false,
 }: Props) {
   return (
@@ -24,6 +28,8 @@ export default function TextField({
         accessibilityLabel={label}
         autoCapitalize="none"
         autoCorrect={false}
+        keyboardType={keyboardType}
+        multiline={multiline}
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
