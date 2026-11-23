@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from "react-native";
 
-export default function IdScreen() {
+export default function EntryFormScreen() {
   return (
     <View style={styles.container}>
       <Text>Id</Text>

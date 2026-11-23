@@ -26,8 +26,13 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 ### Completed
 - Navigation between all screens: Welcome → Login → bottom tabs (Home, Discover, My Lists, Profile, with icons and a highlighted active tab) → Anime details. Login and logout use `replace`, so Back does not return to the previous session.
 
+- Dark theme constants (colors, spacing, font sizes) used across screens.
+- Reusable `AnimeCard` component that receives an anime and an `onPress` callback through props.
+- Discover lists the catalogue with `AnimeCard`; tapping a card opens the Anime details screen, which shows the title's cover, type, genres, episodes, year, rating and synopsis, or "Anime not found" for an unknown id.
+
 ### Partially implemented
-- Screens show placeholder content only. Login has no validation yet, and the details and entry form screens show the route id only.
+- The catalogue has 4 titles (2 series, 2 movies) with placeholder covers instead of images.
+- Home, My Lists and Profile show placeholder content. Login has no validation yet. The entry form screen is a placeholder.
 
 ### Planned
 - Welcome screen and mock login with Zod validation.
