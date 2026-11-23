@@ -14,8 +14,8 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 | Navigation skeleton (welcome, login, 4 tabs, details, entry form) | Done |
 | Catalogue mock data and reusable components | Done |
 | Mock login with Zod validation | Done |
-| Add / edit / remove list entries | In progress |
-| My Lists screen | Not started |
+| Add / edit / remove list entries | Done |
+| My Lists screen | In progress |
 | Discover search and filters | Not started |
 | Home dashboard | Not started |
 | AsyncStorage persistence | Not started |
@@ -31,18 +31,20 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 - Discover lists the catalogue with `AnimeCard`; tapping a card opens the Anime details screen, which shows the title's cover, type, genres, episodes, year, rating and synopsis, or "Anime not found" for an unknown id.
 - Welcome screen and mock login. A Zod schema checks the email format and a password of at least 6 characters. Errors appear under each field, and wrong credentials show "Incorrect email or password". A successful login replaces the login screen with the tabs.
 - Reusable `TextField` and `PrimaryButton` components.
+- List entries kept in shared state (`EntriesContext`) with `addEntry`, `updateEntry` and `removeEntry`, starting from 4 mock entries.
+- From Anime details, the user can add the title to their list or edit their entry (status, episodes watched, optional score and notes) with the entry form, which is validated with Zod. Episodes cannot exceed the title's total. Saving shows a confirmation and returns to details.
+- Remove from List asks for confirmation (Cancel / Remove) before deleting the entry.
+- Reusable `StatusChip` and `EntryList` components.
 
 ### Partially implemented
 - The catalogue has 10 titles (5 series, 5 movies), some marked as trending or popular. Covers are placeholders, not images.
-- Home, My Lists and Profile show placeholder content. The entry form screen is a placeholder.
+- Home shows only a Continue Watching list. My Lists shows all entries in one list, without grouping, counts or filters. Profile is a placeholder.
+- Entries are not saved yet, so changes are lost when the app restarts.
 
 ### Planned
-- Bottom tab navigation: Home, Discover, My Lists, Profile.
-- Home dashboard: greeting, Continue Watching, statistics, watchlist preview.
+- Home dashboard: greeting, statistics, watchlist preview.
 - Discover: search bar, filters (genre, series, movies), Trending and Popular rows.
-- Anime details screen.
-- Add a title to a list, edit its status, progress, score and notes, and remove it with confirmation.
-- My Lists grouped by status, with counts, progress and empty states.
+- My Lists grouped by status, with counts and empty states.
 - Profile with statistics and settings; every option gives visible feedback.
 - List entries saved with AsyncStorage so they remain after restarting the app.
 

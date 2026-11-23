@@ -1,17 +1,8 @@
-import { Text, View, StyleSheet } from "react-native";
+import EntryList from "@/components/EntryList";
+import { useEntries } from "@/context/EntriesContext";
 
 export default function ListsScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Lists</Text>
-    </View>
-  );
-}
+  const { entries } = useEntries();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+  return <EntryList entries={entries} emptyMessage="Find anime in Discover to start your list." />;
+}

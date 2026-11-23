@@ -1,17 +1,14 @@
-import { Text, View, StyleSheet } from "react-native";
+import EntryList from "@/components/EntryList";
+import { useEntries } from "@/context/EntriesContext";
 
 export default function HomeScreen() {
+  const { entries } = useEntries();
+
   return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-    </View>
+    <EntryList
+      heading="Continue Watching"
+      entries={entries.filter((entry) => entry.status === "watching")}
+      emptyMessage="Anime marked Watching will appear here."
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
