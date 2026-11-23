@@ -1,56 +1,132 @@
-# Welcome to your Expo app 👋
+# AniTracker
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+AniTracker is a mobile app for tracking anime series and anime movies. Users can browse a fixed catalogue of titles, add titles to their lists (Watching, Plan to Watch, Completed, On Hold, Dropped), update their episode progress, and see a summary of their activity.
 
-## Get started
+The app is built with React Native, Expo and Expo Router. It uses mock data and local storage; there is no backend.
 
-1. Install dependencies
+> Course: Project 1 (individual). Due November 24, 2026.
 
+## Development progress
+
+| Milestone | Status |
+|---|---|
+| Project setup, template removed, Zod and AsyncStorage installed | Done |
+| Navigation skeleton (welcome, login, 4 tabs, details, entry form) | In progress: route files created, screens not written yet |
+| Catalogue mock data and reusable components | Not started |
+| Mock login with Zod validation | Not started |
+| Add / edit / remove list entries | Not started |
+| My Lists screen | Not started |
+| Discover search and filters | Not started |
+| Home dashboard | Not started |
+| AsyncStorage persistence | Not started |
+| Profile settings and logout | Not started |
+
+## Features
+
+### Completed
+- None yet.
+
+### Partially implemented
+- Route structure for all screens (files exist, content pending).
+
+### Planned
+- Welcome screen and mock login with Zod validation.
+- Bottom tab navigation: Home, Discover, My Lists, Profile.
+- Home dashboard: greeting, Continue Watching, statistics, watchlist preview.
+- Discover: search bar, filters (genre, series, movies), Trending and Popular rows.
+- Anime details screen.
+- Add a title to a list, edit its status, progress, score and notes, and remove it with confirmation.
+- My Lists grouped by status, with counts, progress and empty states.
+- Profile with statistics and settings; every option gives visible feedback.
+- List entries saved with AsyncStorage so they remain after restarting the app.
+
+## Screens and navigation
+
+| Screen | Route | Purpose |
+|---|---|---|
+| Welcome | `/` | Entry screen with a button to log in |
+| Login | `/login` | Mock login with validation |
+| Home | `/(tabs)/home` | Dashboard |
+| Discover | `/(tabs)/discover` | Search and browse the catalogue |
+| My Lists | `/(tabs)/lists` | The user's tracked titles by status |
+| Profile | `/(tabs)/profile` | User info, settings, logout |
+| Anime details | `/anime/[id]` | Information about one title |
+| Entry form | `/entry/[id]` | Add or edit a list entry |
+
+Home, Discover, My Lists and Profile are reached from the bottom tab bar. Logging in replaces the login screen, so the back button does not return to it. Logging out returns to Login.
+
+```text
+   ┌──────────┐      ┌──────────┐
+   │ Welcome  │ ───▶ │  Login   │
+   └──────────┘      └────┬─────┘
+                          │ (replace)
+                          ▼
+   ┌────────────── Bottom tabs ───────────────┐
+   │  Home    Discover    My Lists    Profile │
+   └────┬────────┬───────────┬───────────┬────┘
+        │        │           │           │ Logout
+        └────────┴─────┬─────┘           ▼
+                       ▼               Login
+                ┌──────────────┐
+                │ Anime details│
+                └──────┬───────┘
+                       ▼
+                ┌──────────────┐
+                │  Entry form  │  (add / edit)
+                └──────────────┘
+```
+
+## Technology stack
+
+- TypeScript
+- React 19.3 and React Native 0.88
+- Expo SDK 58
+- Expo Router (file-based navigation)
+- Zod 4 (form validation)
+- @react-native-async-storage/async-storage 2.2 (local persistence)
+
+## Installation and setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/razmigmazakian/anitracker.git
+   cd anitracker
+   ```
+2. Install dependencies:
    ```bash
    npm install
    ```
-
-2. Start the app
-
+3. Start the app:
    ```bash
    npx expo start
    ```
+4. Scan the QR code with Expo Go on your phone.
 
-In the output, you'll find options to open the app in a
+No environment variables are needed.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Tested with: Expo Go on _[fill in: Android / iOS and device]_.
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Mock login credentials
 
-## Get a fresh project
+| Email | Password |
+|---|---|
+| `demo@anitracker.app` | `anime123` |
 
-When you're ready, run:
+Authentication is mock only. The credentials are compared against values stored in the app; nothing connects to a real authentication service.
 
-```bash
-npm run reset-project
-```
+## Known limitations
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+- No backend: the catalogue is fixed mock data and cannot be changed by the user.
+- Login is mock only and does not create accounts.
+- Several Profile settings (language, notifications) show a message but do not change app behaviour.
+- The app is still in development; see the progress table above.
 
-### Other setup steps
+## AI usage statement
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+I used Claude (Anthropic) to plan milestones, explain concepts and error messages, guide my Git workflow, and draft and update this README. All application code was written by me.
 
-## Learn more
+## Submission
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Final commit: _[fill in on submission]_
+- Screenshots: `screenshots/` _(to be added)_
+- Screen-flow diagram: see above

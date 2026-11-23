@@ -1,9 +1,11 @@
-import { Text, View, StyleSheet } from "react-native";
+import { router } from "expo-router";
+import { Button, Text, View, StyleSheet } from "react-native";
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
+      <Text>Welcome</Text>
+      <Button title="Get Started" onPress={() => router.push("/login")} />
     </View>
   );
 }
