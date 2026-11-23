@@ -11,8 +11,8 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 | Milestone | Status |
 |---|---|
 | Project setup, template removed, Zod and AsyncStorage installed | Done |
-| Navigation skeleton (welcome, login, 4 tabs, details, entry form) | In progress: route files created, screens not written yet |
-| Catalogue mock data and reusable components | Not started |
+| Navigation skeleton (welcome, login, 4 tabs, details, entry form) | Done |
+| Catalogue mock data and reusable components | In progress |
 | Mock login with Zod validation | Not started |
 | Add / edit / remove list entries | Not started |
 | My Lists screen | Not started |
@@ -24,10 +24,10 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 ## Features
 
 ### Completed
-- None yet.
+- Navigation between all screens: Welcome → Login → bottom tabs (Home, Discover, My Lists, Profile, with icons and a highlighted active tab) → Anime details. Login and logout use `replace`, so Back does not return to the previous session.
 
 ### Partially implemented
-- Route structure for all screens (files exist, content pending).
+- Screens show placeholder content only. Login has no validation yet, and the details and entry form screens show the route id only.
 
 ### Planned
 - Welcome screen and mock login with Zod validation.
