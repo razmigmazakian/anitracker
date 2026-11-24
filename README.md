@@ -24,39 +24,42 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 ## Features
 
 ### Welcome and Login
-- Welcome screen with a Get Started button.
+- Welcome screen with the app name, tagline, three feature highlights and a Get Started button.
 - Mock login validated with Zod: the email must be a valid address and the password at least 6 characters. Errors appear under each field, and wrong credentials show "Incorrect email or password".
+- Show / hide password button, and a hint showing the demo account.
 - A successful login replaces the login screen with the tabs, so Back does not return to it.
 
 ### Home
-- Personal greeting, a Browse Discover shortcut, and a Continue Watching list of titles marked Watching, with progress and a message when there are none.
+- Personal greeting and a Continue Watching list of titles marked Watching, each with a cover, status badge, progress bar and a "+ Ep" button.
+- When nothing is being watched, an empty state with a "Find something to watch" button that opens Discover.
 
 ### Discover
-- Search bar that matches titles regardless of capitals.
-- Filters button (showing how many filters are active) that opens chips for type (All / Series / Movies) and genre. Tapping the selected genre again clears it. Search and filters combine.
-- Horizontal Trending and Popular rows when no search or filter is active.
-- A no-results message that names the search text.
+- Search bar that matches titles regardless of capitals, with a clear button.
+- Filters button (with a badge showing how many filters are active) that opens chips for type (All / Series / Movies) and genre. Tapping the selected genre again clears it. Search and filters combine, and a Reset filters button clears them.
+- Horizontal Trending and Popular rows when no search or filter is active, then all titles in a two-column grid. While searching or filtering, a result count is shown.
+- A no-results message that names the search text, with a button to clear the search and filters.
 
 ### Anime details
-- Cover, title, type, genres, episodes, year, rating and synopsis.
-- "Add to My List" when the title is not tracked. Otherwise the current status and progress, "Edit Entry", and "Remove from List", which asks for confirmation (Cancel / Remove).
-- "Anime not found" for an unknown id.
+- Cover, title, type, rating, year, episode count, genre tags and synopsis.
+- When the title is in the user's list: its status badge, a progress bar, episodes watched, the user's score and notes.
+- "Add to My List" when the title is not tracked. Otherwise "Edit Entry" and "Remove from List", which asks for confirmation (Cancel / Remove).
+- For an unknown id, a "couldn't find that anime" message with a button back to Discover.
 
 ### Entry form (add / edit)
-- Status chips, episodes watched, optional score (1–10) and optional notes (max 200 characters), validated with Zod.
+- Status chips, episodes watched (typed or with − / + buttons), optional score (1–10) and optional notes (max 200 characters, with a character counter), validated with Zod.
 - Episodes cannot exceed the title's total. Choosing Completed fills in the full episode count.
 - Saving shows a confirmation and returns to the previous screen.
 
 ### My Lists
-- Filter chips for All and each status, each showing its count.
 - Summary of titles and episodes watched.
-- A different empty message for each status.
-- "+1 ep" button on Watching entries that stops at the total episode count.
+- Scrollable filter chips for All and each status, each showing its count.
+- Each entry shows its cover, status badge and progress bar. Watching entries have a "+ Ep" button that stops at the total episode count.
+- A different empty message for each status, with a Browse Discover button when the whole list is empty.
 
 ### Profile
 - Avatar with the user's initial, name and email.
 - Statistics: completed titles, movies watched, total episodes.
-- Settings rows (Theme, Language, Notifications, About), each giving a dialog or confirmation when pressed.
+- Settings rows with icons (Theme, Language, Notifications, About), each giving a dialog or confirmation when pressed.
 - Log out with a confirmation, which returns to Login.
 
 ### State and storage
@@ -65,7 +68,7 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 - A loading indicator shows while entries load, and an error message shows if loading or saving fails. If loading fails, the app does not save, so stored data is never overwritten.
 
 ### Reusable components
-`AnimeCard`, `EntryList`, `PrimaryButton`, `SettingsRow`, `StatusChip`, `TextField`. Each receives its data and callbacks through props.
+`AnimeCard`, `CoverArt`, `EmptyState`, `EntryList`, `PrimaryButton` (primary / secondary / danger variants), `ProgressBar`, `SettingsRow`, `StatusBadge`, `StatusChip`, `TextField`. Each receives its data and callbacks through props. Colors, spacing, corner radius and font sizes come from shared theme constants, and each list status has its own color.
 
 ## Screens and navigation
 
@@ -146,7 +149,7 @@ src/
 
 No environment variables are needed.
 
-Tested with: Expo Go on _[fill in: Android / iOS and device model]_.
+Tested with: Expo Go on iOS (iPhone 17).
 
 ## Mock login credentials
 
@@ -161,7 +164,8 @@ Authentication is mock only. The credentials are compared against values stored 
 - No backend: the catalogue is fixed mock data with 10 titles (5 series, 5 movies) and cannot be changed by the user.
 - Login is mock only and does not create accounts. The login session is not remembered, so the user logs in again each time the app opens. List entries are still saved.
 - Profile settings are placeholders: Theme only offers dark mode (light shows "coming soon"), the chosen language is shown but does not translate the app and is not saved after a restart, and Notifications shows a "not available" message.
-- Cover images are placeholders showing the title.
+- Cover images are placeholders: a colored tile with the title's initials.
+- Tested on iOS only. Dialogs use the native `Alert`, so on the web version the Profile settings do not respond.
 
 ## Screenshots
 
@@ -179,7 +183,12 @@ Authentication is mock only. The credentials are compared against values stored 
 
 ## AI usage statement
 
-I used Claude (Anthropic) to plan milestones, explain concepts and error messages, review my code for problems, guide my Git workflow, and draft and update this README. All application code was written by me.
+I designed and built AniTracker's features myself: navigation, mock login with Zod validation, the shared list state with add, edit and remove, AsyncStorage persistence, search and filters, and the screens and components that use them.
+
+I used AI tools in these ways:
+
+- **Claude (Anthropic)**: planning milestones, explaining concepts and error messages, reviewing my code for problems, guiding my Git workflow, and drafting and updating this README.
+- **UI UX Pro Max** ([nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)), an open-source AI design skill for coding assistants: helping with the final visual redesign (colors, spacing, layout, icons and accessibility labels) and the presentational components `CoverArt`, `EmptyState`, `ProgressBar` and `StatusBadge`. I reviewed these changes, tested them on my iPhone, and understand how they work.
 
 ## Submission
 

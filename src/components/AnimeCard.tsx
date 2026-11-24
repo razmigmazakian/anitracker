@@ -1,6 +1,7 @@
-import { Image } from "expo-image";
+import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
+import CoverArt from "@/components/CoverArt";
 import { colors, fontSize, spacing } from "@/constants/theme";
 import type { Anime } from "@/types/anime";
 
@@ -12,62 +13,70 @@ type Props = {
 export default function AnimeCard({ anime, onPress }: Props) {
   const typeLabel = anime.type === "series" ? "Series" : "Movie";
   const firstGenre = anime.genres[0];
+  const meta = [typeLabel, anime.year, firstGenre].filter(Boolean).join(" · ");
 
   return (
-    <Pressable accessibilityRole="button" onPress={onPress} style={styles.card}>
-      {anime.coverUrl ? (
-        <Image
-          source={{ uri: anime.coverUrl }}
-          style={styles.cover}
-          contentFit="cover"
-        />
-      ) : (
-        <View style={[styles.cover, styles.coverPlaceholder]}>
-          <Text style={styles.title}>{anime.title}</Text>
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={`${anime.title}, ${meta}, rated ${anime.rating.toFixed(1)}`}
+      onPress={onPress}
+      style={({ pressed }) => [styles.card, pressed && styles.pressed]}
+    >
+      <View>
+        <CoverArt anime={anime} style={styles.cover} />
+        <View style={styles.ratingPill}>
+          <Ionicons name="star" size={12} color={colors.rating} />
+          <Text style={styles.rating}>{anime.rating.toFixed(1)}</Text>
         </View>
-      )}
-
-      <Text style={styles.title}>{anime.title}</Text>
-      <Text style={styles.metadata}>
-        {typeLabel}{firstGenre ? ` · ${firstGenre}` : ""}
+      </View>
+      <Text style={styles.title} numberOfLines={2}>
+        {anime.title}
       </Text>
-      <Text style={styles.rating}>Rating: {anime.rating}</Text>
+      <Text style={styles.metadata} numberOfLines={1}>
+        {meta}
+      </Text>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.card,
-    borderColor: colors.border,
-    borderWidth: 1,
-    borderRadius: spacing.small,
-    padding: spacing.medium,
-    gap: spacing.small,
+    gap: spacing.xsmall + 2,
+  },
+  pressed: {
+    opacity: 0.85,
+    transform: [{ scale: 0.98 }],
   },
   cover: {
     width: "100%",
-    height: 160,
-    borderRadius: spacing.small,
+    aspectRatio: 2 / 3,
   },
-  coverPlaceholder: {
-    backgroundColor: colors.background,
+  ratingPill: {
+    position: "absolute",
+    top: spacing.small,
+    left: spacing.small,
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    padding: spacing.medium,
+    gap: 3,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 999,
+    backgroundColor: "rgba(14, 15, 22, 0.8)",
+  },
+  rating: {
+    color: colors.text,
+    fontSize: fontSize.xsmall,
+    fontWeight: "700",
+    fontVariant: ["tabular-nums"],
   },
   title: {
     color: colors.text,
-    fontSize: fontSize.medium,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontSize: fontSize.small,
+    fontWeight: "700",
+    lineHeight: 19,
   },
   metadata: {
     color: colors.textMuted,
-    fontSize: fontSize.small,
-  },
-  rating: {
-    color: colors.primary,
-    fontSize: fontSize.small,
+    fontSize: fontSize.xsmall,
   },
 });

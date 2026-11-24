@@ -2,13 +2,14 @@ import Constants from "expo-constants";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
-  ActivityIndicator, Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View,
+  ActivityIndicator, Alert, Platform, ScrollView, StyleSheet, Text, View,
   type AlertButton,
 } from "react-native";
 
+import PrimaryButton from "@/components/PrimaryButton";
 import SettingsRow from "@/components/SettingsRow";
 import { mockUser } from "@/constants/mockUser";
-import { colors, fontSize, spacing } from "@/constants/theme";
+import { colors, fontSize, radius, spacing } from "@/constants/theme";
 import { useEntries } from "@/context/EntriesContext";
 import { catalogue } from "@/data/catalogue";
 
@@ -84,8 +85,13 @@ export default function ProfileScreen() {
         <Text style={styles.danger}>{error}</Text>
       ) : (
         <View style={styles.stats}>
-          {stats.map(({ label, value }) => (
-            <View key={label} accessible accessibilityLabel={`${label}, ${value}`} style={styles.stat}>
+          {stats.map(({ label, value }, index) => (
+            <View
+              key={label}
+              accessible
+              accessibilityLabel={`${label}, ${value}`}
+              style={[styles.stat, index > 0 && styles.statDivider]}
+            >
               <Text style={styles.number}>{value}</Text>
               <Text style={styles.statLabel}>{label}</Text>
             </View>
@@ -93,42 +99,59 @@ export default function ProfileScreen() {
         </View>
       )}
 
-      <View style={styles.settings}>
-        <SettingsRow label="Theme" value="Dark" onPress={chooseTheme} />
-        <SettingsRow label="Language" value={language} onPress={chooseLanguage} />
-        <SettingsRow
-          label="Notifications"
-          onPress={() => Alert.alert("Notifications", "Notifications are not available in this version.")}
-        />
-        <SettingsRow label="About AniTracker" onPress={showAbout} />
+      <View style={styles.section}>
+        <Text accessibilityRole="header" style={styles.sectionTitle}>Settings</Text>
+        <View style={styles.settings}>
+          <SettingsRow icon="moon-outline" label="Theme" value="Dark" onPress={chooseTheme} />
+          <View style={styles.separator} />
+          <SettingsRow icon="language-outline" label="Language" value={language} onPress={chooseLanguage} />
+          <View style={styles.separator} />
+          <SettingsRow
+            icon="notifications-outline"
+            label="Notifications"
+            value="Off"
+            onPress={() => Alert.alert("Notifications", "Notifications are not available in this version.")}
+          />
+          <View style={styles.separator} />
+          <SettingsRow icon="information-circle-outline" label="About AniTracker" onPress={showAbout} />
+        </View>
       </View>
-      <Pressable accessibilityRole="button" style={styles.logout} onPress={confirmLogout}>
-        <Text style={styles.danger}>Log out</Text>
-      </Pressable>
+      <PrimaryButton title="Log out" variant="danger" icon="log-out-outline" onPress={confirmLogout} />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.background },
-  content: { padding: spacing.medium, gap: spacing.large },
+  content: { padding: spacing.medium, paddingBottom: spacing.xlarge, gap: spacing.large },
   header: { flexDirection: "row", alignItems: "center", gap: spacing.medium },
   avatar: {
     width: 64, height: 64, borderRadius: 32, alignItems: "center",
     justifyContent: "center", backgroundColor: colors.primary,
   },
-  initial: { color: colors.background, fontSize: fontSize.large, fontWeight: "bold" },
-  identity: { flex: 1, gap: spacing.small },
-  name: { color: colors.text, fontSize: fontSize.large, fontWeight: "bold" },
-  secondary: { color: colors.textMuted, fontSize: fontSize.medium },
+  initial: { color: colors.onPrimary, fontSize: fontSize.large, fontWeight: "800" },
+  identity: { flex: 1, gap: spacing.xsmall },
+  name: { color: colors.text, fontSize: fontSize.title, fontWeight: "700" },
+  secondary: { color: colors.textMuted, fontSize: fontSize.small },
   stats: {
-    flexDirection: "row", backgroundColor: colors.card, borderRadius: spacing.small,
-    paddingVertical: spacing.medium,
+    flexDirection: "row", backgroundColor: colors.card, borderRadius: radius.large,
+    borderWidth: 1, borderColor: colors.border, paddingVertical: spacing.medium,
   },
-  stat: { flex: 1, alignItems: "center", gap: spacing.small, paddingHorizontal: spacing.small },
-  number: { color: colors.primary, fontSize: fontSize.large, fontWeight: "bold" },
-  statLabel: { color: colors.textMuted, fontSize: fontSize.small, textAlign: "center" },
-  settings: { gap: spacing.small },
-  logout: { alignItems: "center", padding: spacing.medium },
+  stat: { flex: 1, alignItems: "center", gap: spacing.xsmall, paddingHorizontal: spacing.small },
+  statDivider: { borderLeftWidth: 1, borderLeftColor: colors.border },
+  number: {
+    color: colors.text, fontSize: fontSize.large, fontWeight: "800", fontVariant: ["tabular-nums"],
+  },
+  statLabel: { color: colors.textMuted, fontSize: fontSize.xsmall, textAlign: "center" },
+  section: { gap: spacing.small },
+  sectionTitle: {
+    color: colors.textMuted, fontSize: fontSize.small, fontWeight: "600",
+    textTransform: "uppercase", letterSpacing: 0.5, marginLeft: spacing.xsmall,
+  },
+  settings: {
+    borderRadius: radius.large, overflow: "hidden", borderWidth: 1, borderColor: colors.border,
+    backgroundColor: colors.card,
+  },
+  separator: { height: 1, marginLeft: 60, backgroundColor: colors.border },
   danger: { color: colors.danger, fontSize: fontSize.medium, fontWeight: "600" },
 });

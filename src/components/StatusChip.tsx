@@ -1,21 +1,27 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Pressable, StyleSheet, Text } from "react-native";
 
-import { colors, fontSize, spacing } from "@/constants/theme";
+import { colors, fontSize, radius, spacing, touchTarget } from "@/constants/theme";
 
 type Props = {
   label: string;
   selected: boolean;
   onPress: () => void;
+  accessibilityLabel?: string;
 };
 
-export default function StatusChip({ label, selected, onPress }: Props) {
+export default function StatusChip({ label, selected, onPress, accessibilityLabel }: Props) {
   return (
     <Pressable
       accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel}
       accessibilityState={{ selected }}
       onPress={onPress}
-      style={[styles.chip, selected && styles.selected]}
+      style={({ pressed }) => [styles.chip, selected && styles.selected, pressed && styles.pressed]}
     >
+      {selected ? (
+        <Ionicons name="checkmark" size={16} color={colors.onPrimary} accessibilityElementsHidden />
+      ) : null}
       <Text style={[styles.label, selected && styles.selectedLabel]}>{label}</Text>
     </Pressable>
   );
@@ -23,14 +29,22 @@ export default function StatusChip({ label, selected, onPress }: Props) {
 
 const styles = StyleSheet.create({
   chip: {
-    minHeight: 44,
-    justifyContent: "center",
+    minHeight: touchTarget,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.xsmall,
+    paddingHorizontal: spacing.medium - 2,
+    borderRadius: radius.pill,
+    borderWidth: 1,
+    borderColor: colors.border,
     backgroundColor: colors.card,
-    borderRadius: spacing.small,
-    paddingHorizontal: spacing.small,
   },
   selected: {
     backgroundColor: colors.primary,
+    borderColor: colors.primary,
+  },
+  pressed: {
+    opacity: 0.8,
   },
   label: {
     color: colors.text,
@@ -38,6 +52,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   selectedLabel: {
-    color: colors.background,
+    color: colors.onPrimary,
   },
 });

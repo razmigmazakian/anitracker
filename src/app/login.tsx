@@ -1,11 +1,12 @@
 import { router } from "expo-router";
 import { useState } from "react";
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import PrimaryButton from "@/components/PrimaryButton";
 import TextField from "@/components/TextField";
 import { mockUser } from "@/constants/mockUser";
-import { colors, fontSize, spacing } from "@/constants/theme";
+import { colors, fontSize, radius, spacing } from "@/constants/theme";
 import { loginSchema } from "@/schemas/loginSchema";
 
 type LoginErrors = {
@@ -44,50 +45,77 @@ export default function LoginScreen() {
   }
 
   return (
-    <ScrollView
+    <KeyboardAvoidingView
       style={styles.screen}
-      contentContainerStyle={styles.content}
-      keyboardShouldPersistTaps="handled"
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
-      <Text accessibilityRole="header" style={styles.heading}>
-        Log in
-      </Text>
+      <ScrollView
+        style={styles.screen}
+        contentContainerStyle={styles.content}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={styles.intro}>
+          <Text accessibilityRole="header" style={styles.heading}>
+            Welcome back
+          </Text>
+          <Text style={styles.subtitle}>Log in to continue tracking your anime.</Text>
+        </View>
 
-      <TextField
-        label="Email"
-        value={email}
-        onChangeText={(value) => {
-          setEmail(value);
-          setErrors((current) => ({
-            ...current,
-            email: undefined,
-            credentials: undefined,
-          }));
-        }}
-        error={errors.email}
-      />
+        <TextField
+          label="Email"
+          value={email}
+          onChangeText={(value) => {
+            setEmail(value);
+            setErrors((current) => ({
+              ...current,
+              email: undefined,
+              credentials: undefined,
+            }));
+          }}
+          error={errors.email}
+          keyboardType="email-address"
+          autoComplete="email"
+          textContentType="emailAddress"
+          returnKeyType="next"
+          placeholder="you@example.com"
+        />
 
-      <TextField
-        label="Password"
-        value={password}
-        onChangeText={(value) => {
-          setPassword(value);
-          setErrors((current) => ({
-            ...current,
-            password: undefined,
-            credentials: undefined,
-          }));
-        }}
-        error={errors.password}
-        secureTextEntry
-      />
+        <TextField
+          label="Password"
+          value={password}
+          onChangeText={(value) => {
+            setPassword(value);
+            setErrors((current) => ({
+              ...current,
+              password: undefined,
+              credentials: undefined,
+            }));
+          }}
+          error={errors.password}
+          secureTextEntry
+          autoComplete="current-password"
+          textContentType="password"
+          returnKeyType="go"
+          onSubmitEditing={handleLogin}
+        />
 
-      {errors.credentials ? (
-        <Text style={styles.error}>{errors.credentials}</Text>
-      ) : null}
+        {errors.credentials ? (
+          <View style={styles.errorBanner} accessibilityLiveRegion="polite">
+            <Ionicons name="alert-circle" size={20} color={colors.danger} accessibilityElementsHidden />
+            <Text style={styles.error}>{errors.credentials}</Text>
+          </View>
+        ) : null}
 
-      <PrimaryButton title="Log in" onPress={handleLogin} />
-    </ScrollView>
+        <PrimaryButton title="Log in" onPress={handleLogin} />
+
+        <View style={styles.demo}>
+          <Ionicons name="information-circle-outline" size={18} color={colors.textMuted} accessibilityElementsHidden />
+          <Text style={styles.demoText}>
+            Demo account: {mockUser.email} / {mockUser.password}
+          </Text>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -102,13 +130,40 @@ const styles = StyleSheet.create({
     padding: spacing.large,
     gap: spacing.medium,
   },
+  intro: {
+    gap: spacing.small,
+    marginBottom: spacing.small,
+  },
   heading: {
     color: colors.text,
-    fontSize: fontSize.large,
-    fontWeight: "bold",
+    fontSize: fontSize.display,
+    fontWeight: "800",
+  },
+  subtitle: {
+    color: colors.textMuted,
+    fontSize: fontSize.medium,
+  },
+  errorBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.small,
+    padding: spacing.medium - 4,
+    borderRadius: radius.medium,
+    backgroundColor: colors.dangerSoft,
   },
   error: {
+    flex: 1,
     color: colors.danger,
     fontSize: fontSize.medium,
+  },
+  demo: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: spacing.xsmall + 2,
+  },
+  demoText: {
+    color: colors.textMuted,
+    fontSize: fontSize.small,
   },
 });
