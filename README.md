@@ -175,13 +175,9 @@ Authentication is mock only. The credentials are compared against values stored 
 |---|---|---|
 | ![Welcome](screenshots/welcome.png) | ![Login](screenshots/login.png) | ![Home](screenshots/home.png) |
 
-| Discover | Anime details | Entry form |
+| Discover | My Lists | Profile |
 |---|---|---|
-| ![Discover](screenshots/discover.png) | ![Details](screenshots/details.png) | ![Entry form](screenshots/entry-form.png) |
-
-| My Lists | Profile |
-|---|---|
-| ![My Lists](screenshots/lists.png) | ![Profile](screenshots/profile.png) |
+| ![Discover](screenshots/discover.png) | ![My Lists](screenshots/lists.png) | ![Profile](screenshots/profile.png) |
 
 ## AI usage statement
 
