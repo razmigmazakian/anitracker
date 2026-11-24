@@ -16,7 +16,7 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 | Mock login with Zod validation | Done |
 | Add / edit / remove list entries | Done |
 | My Lists screen | Done |
-| Discover search and filters | Not started |
+| Discover search and filters | Done |
 | Home dashboard | Not started |
 | AsyncStorage persistence | Done |
 | Profile settings and logout | Not started |
@@ -36,6 +36,7 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 - Remove from List asks for confirmation (Cancel / Remove) before deleting the entry.
 - Reusable `StatusChip` and `EntryList` components.
 - List entries are saved with AsyncStorage (key `anitracker:entries`) and restored when the app starts. On the very first launch the 4 mock entries are used. After that the saved list is always used, including when it is empty. A loading indicator shows while entries load, and an error message shows if loading or saving fails. If loading fails, the app does not save, so stored data is never overwritten.
+- Discover: a search bar that matches titles regardless of capitals, and a Filters button (showing how many filters are active) that opens chips for type (All / Series / Movies) and genre. Tapping the selected genre again clears it. Search and filters combine. Horizontal Trending and Popular rows appear when no search or filter is active. A no-results message names the search text.
 - My Lists: filter chips for All and each status, each showing its count; a summary of titles and episodes watched; a different empty message for each status; and a "+1 ep" button on Watching entries that stops at the total episode count.
 
 ### Partially implemented
@@ -44,7 +45,6 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 
 ### Planned
 - Home dashboard: greeting, statistics, watchlist preview.
-- Discover: search bar, filters (genre, series, movies), Trending and Popular rows.
 - Profile with statistics and settings; every option gives visible feedback.
 - List entries saved with AsyncStorage so they remain after restarting the app.
 
