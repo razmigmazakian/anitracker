@@ -31,11 +31,11 @@ export default function TabLayout() {
       />
       <Tabs.Screen
         name="discover"
-        options={{ title: "Discover", tabBarIcon: tabIcon("compass", "compass-outline") }}
+        options={{ title: "Discover", tabBarIcon: tabIcon("search", "search-outline") }}
       />
       <Tabs.Screen
         name="lists"
-        options={{ title: "My Lists", tabBarIcon: tabIcon("albums", "albums-outline") }}
+        options={{ title: "My Lists", tabBarIcon: tabIcon("list", "list-outline") }}
       />
       <Tabs.Screen
         name="profile"
