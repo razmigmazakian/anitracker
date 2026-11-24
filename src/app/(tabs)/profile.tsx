@@ -1,8 +1,7 @@
 import Constants from "expo-constants";
 import { router } from "expo-router";
-import { useState } from "react";
 import {
-  ActivityIndicator, Alert, Platform, ScrollView, StyleSheet, Text, View,
+  ActivityIndicator, Alert, ScrollView, StyleSheet, Text, View,
   type AlertButton,
 } from "react-native";
 
@@ -13,12 +12,10 @@ import { colors, fontSize, radius, spacing } from "@/constants/theme";
 import { useEntries } from "@/context/EntriesContext";
 import { catalogue } from "@/data/catalogue";
 
-const languages = ["English", "Arabic", "Japanese"];
 const cancel: AlertButton = { text: "Cancel", style: "cancel" };
 
 export default function ProfileScreen() {
   const { entries, isLoading, error } = useEntries();
-  const [language, setLanguage] = useState("English");
   const completed = entries.filter((entry) => entry.status === "completed");
   const moviesWatched = completed.filter((entry) =>
     catalogue.some((anime) => anime.id === entry.animeId && anime.type === "movie")
@@ -35,23 +32,6 @@ export default function ProfileScreen() {
       { text: "Dark", onPress: () => Alert.alert("Theme", "Dark mode is active.") },
       { text: "Light", onPress: () => Alert.alert("Theme", "Light mode is coming soon.") },
     ], { cancelable: true });
-  }
-
-  function chooseLanguage() {
-    const choices = languages.map((name) => ({
-      text: name,
-      onPress: () => {
-        setLanguage(name);
-        Alert.alert("Language", `Language set to ${name}`);
-      },
-    }));
-    // Android supports three alert buttons and allows dismissal with Back.
-    Alert.alert(
-      "Language",
-      "Choose a language.",
-      Platform.OS === "android" ? choices : [...choices, cancel],
-      { cancelable: true },
-    );
   }
 
   function showAbout() {
@@ -103,8 +83,6 @@ export default function ProfileScreen() {
         <Text accessibilityRole="header" style={styles.sectionTitle}>Settings</Text>
         <View style={styles.settings}>
           <SettingsRow icon="moon-outline" label="Theme" value="Dark" onPress={chooseTheme} />
-          <View style={styles.separator} />
-          <SettingsRow icon="language-outline" label="Language" value={language} onPress={chooseLanguage} />
           <View style={styles.separator} />
           <SettingsRow
             icon="notifications-outline"

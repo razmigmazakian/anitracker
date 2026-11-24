@@ -59,7 +59,7 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 ### Profile
 - Avatar with the user's initial, name and email.
 - Statistics: completed titles, movies watched, total episodes.
-- Settings rows with icons (Theme, Language, Notifications, About), each giving a dialog or confirmation when pressed.
+- Settings rows with icons (Theme, Notifications, About), each giving a dialog or confirmation when pressed.
 - Log out with a confirmation, which returns to Login.
 
 ### State and storage
@@ -163,7 +163,7 @@ Authentication is mock only. The credentials are compared against values stored 
 
 - No backend: the catalogue is fixed mock data with 10 titles (5 series, 5 movies) and cannot be changed by the user.
 - Login is mock only and does not create accounts. The login session is not remembered, so the user logs in again each time the app opens. List entries are still saved.
-- Profile settings are placeholders: Theme only offers dark mode (light shows "coming soon"), the chosen language is shown but does not translate the app and is not saved after a restart, and Notifications shows a "not available" message.
+- Profile settings are placeholders: Theme only offers dark mode (light shows "coming soon"), and Notifications shows a "not available" message.
 - Cover images are placeholders: a colored tile with the title's initials.
 - Tested on iOS only. Dialogs use the native `Alert`, so on the web version the Profile settings do not respond.
 
