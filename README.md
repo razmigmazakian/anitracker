@@ -19,7 +19,7 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 | Discover search and filters | Done |
 | Home dashboard | Not started |
 | AsyncStorage persistence | Done |
-| Profile settings and logout | Not started |
+| Profile settings and logout | Done |
 
 ## Features
 
@@ -37,11 +37,12 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 - Reusable `StatusChip` and `EntryList` components.
 - List entries are saved with AsyncStorage (key `anitracker:entries`) and restored when the app starts. On the very first launch the 4 mock entries are used. After that the saved list is always used, including when it is empty. A loading indicator shows while entries load, and an error message shows if loading or saving fails. If loading fails, the app does not save, so stored data is never overwritten.
 - Discover: a search bar that matches titles regardless of capitals, and a Filters button (showing how many filters are active) that opens chips for type (All / Series / Movies) and genre. Tapping the selected genre again clears it. Search and filters combine. Horizontal Trending and Popular rows appear when no search or filter is active. A no-results message names the search text.
+- Profile: avatar with the user's initial, name and email; statistics for completed titles, movies watched and total episodes; settings rows (Theme, Language, Notifications, About) built with a reusable `SettingsRow` component, each giving a dialog or confirmation when pressed; and Log out with a confirmation, which returns to Login.
 - My Lists: filter chips for All and each status, each showing its count; a summary of titles and episodes watched; a different empty message for each status; and a "+1 ep" button on Watching entries that stops at the total episode count.
 
 ### Partially implemented
 - The catalogue has 10 titles (5 series, 5 movies), some marked as trending or popular. Covers are placeholders, not images.
-- Home shows only a Continue Watching list. Profile has only a logout button.
+- Home shows only a Continue Watching list.
 
 ### Planned
 - Home dashboard: greeting, statistics, watchlist preview.
@@ -126,7 +127,9 @@ Authentication is mock only. The credentials are compared against values stored 
 
 - No backend: the catalogue is fixed mock data and cannot be changed by the user.
 - Login is mock only and does not create accounts.
-- Several Profile settings (language, notifications) show a message but do not change app behaviour.
+- Profile settings are placeholders: Theme only offers dark mode (light shows "coming soon"), the chosen language is shown but does not translate the app and is not saved after a restart, and Notifications shows a "not available" message.
+- The login session is not remembered: the user logs in again each time the app opens. List entries are still saved.
+- Cover images are placeholders showing the title.
 - The app is still in development; see the progress table above.
 
 ## AI usage statement
