@@ -85,6 +85,8 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 
 Home, Discover, My Lists and Profile are reached from the bottom tab bar, which highlights the selected tab. Logging in and logging out use `router.replace`, so Back does not cross between the logged-in and logged-out parts of the app.
 
+![AniTracker screen flow](screenshots/flow-diagram.png)
+
 ```text
    ┌──────────┐      ┌──────────┐
    │ Welcome  │ ───▶ │  Login   │
@@ -192,5 +194,5 @@ I used AI tools in these ways:
 
 ## Submission
 
-- Final commit: _[fill in on submission]_
-- Screen-flow diagram: see [Screens and navigation](#screens-and-navigation) and `screenshots/flow-diagram.png`
+- Final commit: tagged `v1.0-submission`
+- Screen-flow diagram: `screenshots/flow-diagram.png` (also `flow-diagram.svg`), shown under [Screens and navigation](#screens-and-navigation)
