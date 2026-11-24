@@ -15,7 +15,7 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 | Catalogue mock data and reusable components | Done |
 | Mock login with Zod validation | Done |
 | Add / edit / remove list entries | Done |
-| My Lists screen | In progress |
+| My Lists screen | Done |
 | Discover search and filters | Not started |
 | Home dashboard | Not started |
 | AsyncStorage persistence | Done |
@@ -36,15 +36,15 @@ The app is built with React Native, Expo and Expo Router. It uses mock data and 
 - Remove from List asks for confirmation (Cancel / Remove) before deleting the entry.
 - Reusable `StatusChip` and `EntryList` components.
 - List entries are saved with AsyncStorage (key `anitracker:entries`) and restored when the app starts. On the very first launch the 4 mock entries are used. After that the saved list is always used, including when it is empty. A loading indicator shows while entries load, and an error message shows if loading or saving fails. If loading fails, the app does not save, so stored data is never overwritten.
+- My Lists: filter chips for All and each status, each showing its count; a summary of titles and episodes watched; a different empty message for each status; and a "+1 ep" button on Watching entries that stops at the total episode count.
 
 ### Partially implemented
 - The catalogue has 10 titles (5 series, 5 movies), some marked as trending or popular. Covers are placeholders, not images.
-- Home shows only a Continue Watching list. My Lists shows all entries in one list, without grouping, counts or filters. Profile is a placeholder.
+- Home shows only a Continue Watching list. Profile has only a logout button.
 
 ### Planned
 - Home dashboard: greeting, statistics, watchlist preview.
 - Discover: search bar, filters (genre, series, movies), Trending and Popular rows.
-- My Lists grouped by status, with counts and empty states.
 - Profile with statistics and settings; every option gives visible feedback.
 - List entries saved with AsyncStorage so they remain after restarting the app.
 
